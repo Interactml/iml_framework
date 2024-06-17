@@ -16,11 +16,6 @@ namespace InteractML
         private IMLGraph graph;
 
         /// <summary>
-        /// Controls whether Regression and DTW nodes show
-        /// </summary>
-        private bool m_UseTestingState = false;
-
-        /// <summary>
         /// initialise graph reference when created
         /// </summary>
         public override void OnCreate()
@@ -113,11 +108,11 @@ namespace InteractML
             {
                 return base.GetNodeMenuName(type).Replace("InteractML.ClassificationMLSystem", "Machine Learning System - Classification");
             }
-            if (type.PrettyName() == "InteractML.RegressionMLSystem" && !m_UseTestingState )
+            if (type.PrettyName() == "InteractML.RegressionMLSystem" && !IMLSettings.Instance.UseTestingState)
             {
                 return base.GetNodeMenuName(type).Replace("InteractML.RegressionMLSystem", "Machine Learning System - Regression");
             }
-            if (type.PrettyName() == "InteractML.DTWMLSystem" && !m_UseTestingState)
+            if (type.PrettyName() == "InteractML.DTWMLSystem" && !IMLSettings.Instance.UseTestingState)
             {
                 return base.GetNodeMenuName(type);
             }
@@ -132,12 +127,12 @@ namespace InteractML
             {
                 return base.GetNodeMenuName(type).Replace("InteractML", "");
             }
-            if (type.PrettyName() == "InteractML.SeriesTrainingExamplesNode" && !m_UseTestingState)
+            if (type.PrettyName() == "InteractML.SeriesTrainingExamplesNode" && !IMLSettings.Instance.UseTestingState)
             {
                 return base.GetNodeMenuName(type).Replace("InteractML", "");
             }
             // Node to hold several single training Examples
-            if (type.PrettyName() == "InteractML.TrainingDataSetsNode" && !m_UseTestingState)
+            if (type.PrettyName() == "InteractML.TrainingDataSetsNode" && !IMLSettings.Instance.UseTestingState)
             {
                 return base.GetNodeMenuName(type).Replace("InteractML", "");
             }
@@ -220,11 +215,11 @@ namespace InteractML
              }
 
             /* UNIVERSAL INPUT */
-            if (type.PrettyName() == "InteractML.ControllerCustomisers.InputSetUp" && !m_UseTestingState)
+            if (type.PrettyName() == "InteractML.ControllerCustomisers.InputSetUp" && !IMLSettings.Instance.UseTestingState)
             {
                 return base.GetNodeMenuName(type).Replace("InteractML", "");
             }
-            if (type.PrettyName() == "InteractML.CustomControllers.InputSetUp" && !m_UseTestingState)
+            if (type.PrettyName() == "InteractML.CustomControllers.InputSetUp" && !IMLSettings.Instance.UseTestingState)
             {
                 return base.GetNodeMenuName(type).Replace("InteractML", "");
             }

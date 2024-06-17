@@ -250,14 +250,6 @@ namespace InteractML
         #region Testing Variables
 
         /// <summary>
-        /// Are we using a testing state after running the model?
-        /// </summary>
-        public bool UseTestingState { get => m_UseTestingState; set => m_UseTestingState = value; }
-        /// <summary>
-        /// Change this flag to use or not the testing state after the running state
-        /// </summary>
-        private bool m_UseTestingState = true;
-        /// <summary>
         /// Is the node collecting testing data for this model?
         /// </summary>
         protected bool m_Testing;
@@ -731,7 +723,7 @@ namespace InteractML
             if ((Model != null && TotalNumTrainingDataConnected > 0 && !Running && !Training))
             {
                 // If testing state used...
-                if (UseTestingState)
+                if (IMLSettings.Instance.UseTestingState)
                 {
                     // If we are testing, can't train
                     if (Testing) canTrain = false;
@@ -785,7 +777,7 @@ namespace InteractML
                 
             }
             // Clear testing data everytime we train the model (only when using testing state)
-            if (UseTestingState && isTrained && m_TestingData != null) m_TestingData.Clear();
+            if (IMLSettings.Instance.UseTestingState && isTrained && m_TestingData != null) m_TestingData.Clear();
             return isTrained;
         }
 
@@ -841,7 +833,7 @@ namespace InteractML
             isTrained = m_Model.Train(m_RapidlibTrainingExamples);
 
             // If using testing state, reset flag to allow testing
-            if (UseTestingState && isTrained) m_TestingDataCollectedThisIteration = false;
+            if (IMLSettings.Instance.UseTestingState && isTrained) m_TestingDataCollectedThisIteration = false;
 
             //Debug.Log($"Model trained with {m_TotalNumUniqueClasses} unique classes");
 
@@ -981,7 +973,7 @@ namespace InteractML
         {
             bool success = false;
             // Is the testing state allowed 
-            if (m_UseTestingState)
+            if (IMLSettings.Instance.UseTestingState)
             {
                 // At first, if the testing hasn't been done, do collecting testing data!
                 if (!m_Running && !Testing && !AllTestingClassesCollected && CanRun())
@@ -2557,7 +2549,7 @@ namespace InteractML
                         status += "Running \n";
                     }
                     // Only display this section if testing state is enabled
-                    if (UseTestingState)
+                    if (IMLSettings.Instance.UseTestingState)
                     {
                         GestTestingStatus(ref status);
                     }
@@ -2598,7 +2590,7 @@ namespace InteractML
                         if (IsRunKeyButtonConnected())
                         {
                             string state = "";
-                            if (UseTestingState && !AllTestingClassesCollected) state = "Test & Run";
+                            if (IMLSettings.Instance.UseTestingState && !AllTestingClassesCollected) state = "Test & Run";
                             else state = "Run";
 
                             status += $" (Press {GetRunKeyButtonName()} to {state})";

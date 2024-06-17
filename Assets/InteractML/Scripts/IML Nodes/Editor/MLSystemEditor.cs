@@ -117,7 +117,7 @@ namespace InteractML
         protected void ShowRunOnAwakeToggle(MLSystem configNode)
         {
             // If testing state used...
-            if (m_MLSystem.UseTestingState)
+            if (IMLSettings.Instance.UseTestingState)
             {
                 // If we are testing, disable gui
                 if (m_MLSystem.Testing) GUI.enabled = false;
@@ -271,7 +271,7 @@ namespace InteractML
             {
                 nameButton = "STOP";
                 // In case we are using the testing state
-                if (m_MLSystem.UseTestingState) nameButton = "STOP & RATE";
+                if (IMLSettings.Instance.UseTestingState) nameButton = "STOP & RATE";
             }
             else
             {
@@ -279,7 +279,7 @@ namespace InteractML
                     nameButton = "Populate";
                 else
                 {
-                    if (m_MLSystem.UseTestingState && !m_MLSystem.AllTestingClassesCollected) nameButton = "Test & Run";
+                    if (IMLSettings.Instance.UseTestingState && !m_MLSystem.AllTestingClassesCollected) nameButton = "Test & Run";
                     else nameButton = "Run";
                 }
             }
@@ -288,7 +288,7 @@ namespace InteractML
                 // And If the system isn't running as well
                 && !m_MLSystem.Running)
                 // OR if the node is testing!
-                || (m_MLSystem.UseTestingState && m_MLSystem.Testing))
+                || (IMLSettings.Instance.UseTestingState && m_MLSystem.Testing))
             {
                /* Debug.Log(m_MLSystem.Model == null);
                 Debug.Log(m_MLSystem.Model.ModelAddress == (IntPtr)0);
@@ -348,7 +348,7 @@ namespace InteractML
         protected virtual void ShowTestingPanel()
         {
             // Only draw if the testing state is used and active
-            if (m_MLSystem.UseTestingState && m_MLSystem.Testing)
+            if (IMLSettings.Instance.UseTestingState && m_MLSystem.Testing)
             {
                 // Avoid testing in a hotreload (needed vars are not properly populated)
                 if (m_MLSystem.TotalUniqueTrainingClasses == null && m_MLSystem.TotalUniqueTrainingClasses.Count == 0 || m_MLSystem.CurrentTestingClassCollected > m_MLSystem.TotalUniqueTrainingClasses.Count - 1)
